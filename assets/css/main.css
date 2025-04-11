@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@source "/app/src/**/*.html";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+
+    --color-surface: var(--color-white);
+    --color-on-surface: var(--color-zinc-950);
+    --color-surface-alt: #f9fafb;
+    --color-primary: var(--color-zinc-900);
+    --color-on-primary: var(--color-white);
+    --color-secondary: #f87171;
+    --color-on-secondary: #000000;
+    --color-outline: var(--color-zinc-950);
+    --color-outline-strong: #d1d5db;
+
+    --color-surface-dark: #ffffff;
+    --color-on-surface-dark: #000000;
+    --color-surface-alt-dark: #f9fafb;
+    --color-primary-dark: var(--color-primary-500);
+    --color-on-primary-dark: #ffffff;
+    --color-secondary-dark: #f87171;
+    --color-on-secondary-dark: #000000;
+    --color-outline-dark: #e5e7eb;
+    --color-outline-strong-dark: #d1d5db;
+
+    --color-danger: var(--color-red-600);
+    --color-on-danger: var(--color-white);
+    --color-danger-strong: #dc2626;
+    --color-warning: #f59e0b;
+    --color-on-warning: #ffffff;
+    --color-warning-strong: #f59e0b;
+    --color-success: #10b981;
+    --color-on-success: #ffffff;
+    --color-success-strong: #047857;
+    --color-info: #3b82f6;
+    --color-on-info: #ffffff;
+    --color-info-strong: #2563eb;
+
+}
+
+up-modal-box {
+    @apply shadow-lg rounded-md;
+  }
+
+up-modal-viewport {
+    @apply fixed !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2 !m-0
+           sm:w-[500px]
+           max-sm:w-full max-sm:max-h-[90vh]
+           max-sm:overflow-y-auto
+           lg:rounded
+           
+  }
+
+up-modal-backdrop {
+    @apply fixed !inset-0 !bg-black/40;
+}
+
+
+.formset-label {
+	@apply text-sm text-gray-600;
+}
+.formset-text-input, .formset-email-input, .formset-date-input, .formset-select, .formset-select-multiple, .formset-number-input, .formset-textarea, .formset-password-input, .formset-url-input {
+	@apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300;
+}
+
+@utility
+formset-select-multiple {
+	@apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300;
+}
+
+
+@utility
+formset-text-input {
+	@apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300;
+}
+
+.formset-dual-selector-select {
+	@apply formset-select-multiple rounded-t-none w-full;
+}
+.formset-dual-selector-select optgroup {
+	@apply font-bold;
+}
+.formset-dual-selector-lookup {
+	@apply formset-text-input border-b-0 rounded-b-none ;
+}
+.dj-dual-selector ~ .dj-field-errors {
+	@apply text-end;
+}
+[is="django-dual-selector"] {
+	@apply w-full;
+}
+.formset-checkbox, .formset-checkbox-multiple {
+	@apply mr-2 focus:ring-indigo-100 border-gray-300 rounded;
+}
+.formset-radio-select {
+	@apply mr-2 focus:ring-indigo-100 border-gray-300;
+}
+.formset-inlined {
+	@apply mr-3 inline-block;
+}
+.formset-help-text {
+	@apply text-gray-500;
+}
+.formset-button-default {
+	@apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+}
+.formset-button-default:disabled {
+	@apply text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center;
+}
+.formset-button-light {
+	@apply text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
+}
+.formset-button-green {
+	@apply focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800;
+}
+.formset-button-red {
+	@apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
+}
+.formset-button-yellow {
+	@apply focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900;
+}
+.formset-button-purple {
+	@apply focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900;
+}
+.dj-choose-file {
+	@apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+}
+.dj-delete-file {
+	@apply bg-yellow-200 hover:bg-yellow-600 text-black hover:text-white font-semibold text-sm py-1 px-3 rounded;
+}
+.dj-download-file {
+	@apply bg-gray-200 hover:bg-gray-300 text-black font-semibold py-1 px-3 text-sm rounded;
+}
+.dj-richtext-wrapper dialog {
+	@apply p-0 break-words bg-white border rounded-lg shadow-lg;
+}
+.dj-richtext-wrapper dialog .dialog-header {
+	@apply p-4 border-b border-gray-300;
+}
+.dj-richtext-wrapper dialog .dialog-body {
+	@apply p-4 relative flex-1;
+}
+.dj-richtext-wrapper dialog .dialog-footer {
+	@apply p-4 border-t border-gray-300;
+}
+.dj-richtext-wrapper dialog h3 {
+	@apply text-lg font-semibold;
+}
+.dj-richtext-wrapper a {
+	@apply text-blue-500 underline;
+}

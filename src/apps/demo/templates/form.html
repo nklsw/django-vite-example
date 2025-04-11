@@ -1,0 +1,26 @@
+<c-layout.default>
+<c-section>
+  <c-section.header>
+    <c-slot name="title">
+      {% if request.path == '/team/add' %}
+        <c-heading>New Team Member</c-heading>
+      {% else %}
+        <c-heading>Edit Team Member</c-heading>
+      {% endif %}
+    </c-slot>
+  </c-section.header>
+  <c-section.body>
+    <form id="memeber_form" class="space-y-4" action="{{ request.path }}" up-submit up-disable up-on-success="up.layer.dismiss()" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+          <c-form.fieldgroup :field="{{ field }}"/>
+      {% endfor %}
+      <div class="py-4">
+        <c-button type="submit" value="Submit">{% if request.path == '/team/add' %}Create{% else %}Update{% endif %}</c-button>
+      </div>
+    </form>
+  </c-section.body>
+  
+</c-section>
+
+</c-layout.default>
