@@ -126,6 +126,90 @@ The project uses a hierarchical template structure:
 3. Run `just test` to execute tests
 4. Run `just ruff` to check code style and formatting
 
+## Asset Pipeline
+
+The project uses Vite to manage and build frontend assets, including JavaScript, CSS, and other static files. The asset pipeline is integrated into the Dockerized environment for both development and production.
+
+### Development Workflow
+
+1. **Asset Development Server**: During development, the `assets` service in `docker-compose.yml` runs the Vite development server. This allows for hot module replacement (HMR) and live reloading of frontend assets.
+   - Command: `pnpm run dev`
+   - Port: `${DJANGO_VITE_DEV_SERVER_PORT}` (default: 5175)
+
+2. **File Structure**:
+   - `/assets/js`: Contains JavaScript files, including `alpine.js` and `unpoly.js`.
+   - `/assets/css`: Contains Tailwind CSS configuration and custom styles.
+   - `/assets/package.json`: Defines dependencies and scripts for the asset pipeline.
+
+3. **Running Locally**:
+   - Start the development server with `just start`. The Vite server will serve assets dynamically.
+
+### Production Workflow
+
+1. **Asset Build**: The `assets_builder` stage in the `Dockerfile` compiles and bundles the assets using Vite.
+   - Command: `pnpm run build`
+   - Output: Bundled assets are placed in `/app/src/assets_dist`.
+
+2. **Static File Collection**: During the production build, Django collects the static files, including the compiled assets, into the `staticfiles` directory.
+   - Command: `python3 manage.py collectstatic --no-input`
+
+3. **Docker Integration**:
+   - The `assets` service in `docker-compose.yml` ensures that assets are built and served correctly.
+   - The production image includes pre-built assets for deployment.
+
+### Production Usage
+
+In a production environment, Docker Compose is not used. Instead, the production Docker image should be built and deployed using the default target in the `Dockerfile`. The following steps outline the production workflow:
+
+1. **Build Production Image**:
+   - Use the default target in the `Dockerfile` to build the production-ready image.
+   - Command:
+     ```sh
+     docker build -t your-production-image-name .
+     ```
+
+2. **Deploy the Image**:
+   - Deploy the built image using your preferred container orchestration platform (e.g., Kubernetes, Docker Swarm).
+   - Ensure that the `DJANGO_SETTINGS_MODULE` environment variable is set to `config.settings.prod` for production settings.
+
+3. **Static File Collection**:
+   - The production image automatically collects static files during the build process using the `collectstatic` command.
+
+4. **Environment Variables**:
+   - Configure the necessary environment variables for production, such as `SECRET_KEY`, `DATABASE_URL`, and `ALLOWED_HOSTS`.
+
+### Development vs Production Targets
+
+- **Development**:
+  - Use the `app_dev` target in the `Dockerfile` for development.
+  - This target includes tools and configurations for debugging and live reloading.
+  - Command:
+    ```sh
+    docker-compose up
+    ```
+
+- **Production**:
+  - Use the default target in the `Dockerfile` for production.
+  - This target is optimized for performance and excludes development dependencies.
+  - Command:
+    ```sh
+    docker build -t your-production-image-name .
+    ```
+
+### pnpm as Default Package Manager
+
+This project uses `pnpm` as the default package manager for managing frontend dependencies. It is chosen for its speed, efficient disk space usage, and monorepo support.
+
+### Environment Variables
+
+The following environment variables control the asset pipeline:
+
+- `NODE_ENV`: Set to `development` for local development and `production` for builds.
+- `DJANGO_VITE_DEV_MODE`: Set to `true` for development mode and `false` for production.
+- `DJANGO_VITE_DEV_SERVER_PORT`: Port for the Vite development server (default: 5175).
+
+This setup ensures a seamless integration of the asset pipeline into the Django project, providing a modern frontend development experience.
+
 ## Production Deployment
 
 Build the production image:
