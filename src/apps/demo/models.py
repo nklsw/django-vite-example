@@ -10,7 +10,6 @@ class TeamMember(models.Model):
         return self.full_name
 
 
-
 class Project(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()

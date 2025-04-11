@@ -12,7 +12,7 @@ INSTALLED_APPS += ["debug_toolbar", "django_structlog"]  # noqa: F405
 MIDDLEWARE += [  # noqa: F405
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django_structlog.middlewares.RequestMiddleware",
-    ]
+]
 
 # internals ips may vary according to your docker network config
 INTERNAL_IPS = ["127.0.0.1", "172.18.0.1"]
@@ -38,7 +38,9 @@ LOGGING = {
         },
         "key_value": {
             "()": structlog.stdlib.ProcessorFormatter,
-            "processor": structlog.processors.KeyValueRenderer(key_order=["timestamp", "level", "event", "logger"]),
+            "processor": structlog.processors.KeyValueRenderer(
+                key_order=["timestamp", "level", "event", "logger"]
+            ),
         },
     },
     "handlers": {
@@ -46,7 +48,6 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "plain_console",
         },
-
     },
     "loggers": {
         "django_structlog": {
@@ -58,7 +59,7 @@ LOGGING = {
             "handlers": ["console"],
             "level": "INFO",
         },
-    }
+    },
 }
 
 structlog.configure(
