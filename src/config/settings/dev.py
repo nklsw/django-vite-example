@@ -18,7 +18,7 @@ INTERNAL_IPS = ["127.0.0.1"]
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": env.bool("DJANGO_VITE_DEV_MODE", default=False),
+        "dev_mode": env.bool("DJANGO_VITE_DEV_MODE", default=True),
         "dev_server_port": env("DJANGO_VITE_DEV_SERVER_PORT", default="5173"),
     }
 }

@@ -25,7 +25,7 @@ export default defineConfig({
   // Fixed development server settings
   server: {
     host: '0.0.0.0',
-    port: 5175,
+    port: 5173,
     origin: 'http://localhost:5173'
   }
 });

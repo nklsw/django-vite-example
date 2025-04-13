@@ -15,8 +15,7 @@ RUN npm i -g corepack@latest && corepack enable
 
 USER node
 
-ARG NODE_ENV="production"
-ENV NODE_ENV="${NODE_ENV}" \
+ENV NODE_ENV="development" \
     USER="node"
 
 COPY --chown=node:node ./assets /app/assets
@@ -86,7 +85,7 @@ CMD ["granian", "--interface", "asgi", "config.asgi:application", "--host", "0.0
 
 ###############################################################################
 
-FROM python:3.13-slim-bookworm
+FROM python:3.13-slim-bookworm AS app_prod
 
 # Copy the application from the builder
 COPY --from=app_builder --chown=app:app /app /app
