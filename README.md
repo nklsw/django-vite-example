@@ -1,4 +1,4 @@
-# django-unpoly-playground
+# django-vite-example
 
 An opinionated boilerplate project using Django with Vite for js/css assets and a dockerized development environment + production-ready docker image for deployment.
 
