@@ -1,40 +1,31 @@
-import { defineConfig, loadEnv } from 'vite';
-import { resolve, join } from 'path';
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
 
-
-export default defineConfig((mode) => {
-  const env = loadEnv(mode, process.cwd(), '');
-
-  const INPUT_DIR = '/app/assets';
-  const OUTPUT_DIR = '/app/assets_dist';
-
-  return {
-    plugins: [
-      tailwindcss()
-    ],
-    resolve: {
-      alias: {
-        '@': resolve(INPUT_DIR),
-      },
-    },
-    root: resolve(INPUT_DIR),
-    base: '/static/',
-    css: {},
-    server: {
-      host: env.DJANGO_VITE_DEV_SERVER_HOST,
-      port: env.DJANGO_VITE_DEV_SERVER_PORT,
-    },
-    build: {
-      manifest: true,
-      emptyOutDir: true,
-      outDir: resolve(OUTPUT_DIR),
-      rollupOptions: {
-        input: {
-          css: join(INPUT_DIR, '/css/main.css'),
-          js: [join(INPUT_DIR, '/js/unpoly.js'), join(INPUT_DIR, '/js/alpine.js')],
-        },
-      },
-    },
-  };
+export default defineConfig({
+  plugins: [tailwindcss()],
+  
+  // Simple static paths instead of env variables
+  root: resolve('./src'),
+  base: '/static/',
+  
+  build: {
+    // Single output location
+    outDir: resolve('../assets_dist'),
+    emptyOutDir: true,
+    manifest: "manifest.json",
+    rollupOptions: {
+      input: {
+        main: resolve('./src/js/main.js'),
+        styles: resolve('./src/css/main.css')
+      }
+    }
+  },
+  
+  // Fixed development server settings
+  server: {
+    host: '0.0.0.0',
+    port: 5175,
+    origin: 'http://localhost:5173'
+  }
 });

@@ -84,6 +84,23 @@ services:
           target: /app/assets
           ignore: 
             - ./assets/node_modules
+  
+  test:
+    build:
+      context: "."
+      args:
+        UID: "${UID:-1000}"
+        GID: "${GID:-1000}"
+        UV_INSTALL_DEV: "true"
+        DJANGO_DEBUG: "false"
+    depends_on:
+      db:
+        condition: service_started
+    volumes:
+    - "./src:/app/src:z"
+    - "/app/assets_dist"
+    env_file:
+      - ".env"
 
 volumes:
   db: {}

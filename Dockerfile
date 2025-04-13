@@ -1,4 +1,4 @@
-FROM node:23.6.0-bookworm-slim AS assets
+FROM node:23.6-bookworm-slim AS assets
 
 WORKDIR /app/assets
 
@@ -6,7 +6,7 @@ ARG UID=1000
 ARG GID=1000
 
 RUN groupmod -g "${GID}" node && usermod -u "${UID}" -g "${GID}" node \
-    && mkdir -p ./node_modules && chown node:node -R ./node_modules /app/assets
+    && mkdir -p ./node_modules /app/assets_dist && chown node:node -R ./node_modules /app/assets /app/assets_dist
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -90,7 +90,7 @@ FROM python:3.13-slim-bookworm
 
 # Copy the application from the builder
 COPY --from=app_builder --chown=app:app /app /app
-COPY --from=assets_builder --chown=app:app /app/src/assets_dist /app/src/assets_dist
+COPY --from=assets_builder --chown=app:app /app/assets_dist /app/assets_dist
 
 # Place executables in the environment at the front of the path
 ENV PATH="/app/.venv/bin:$PATH" \
@@ -100,8 +100,5 @@ WORKDIR /app/src
 
 RUN DJANGO_SECRET_KEY=dummyvalue python3 manage.py collectstatic --no-input
 
-# Add healthcheck
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD python3 -c "import requests; requests.get('http://localhost:8000/admin/', timeout=30)"
 
 CMD ["granian", "--interface", "asgi", "config.asgi:application", "--host", "0.0.0.0", "--port", "8000"]

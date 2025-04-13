@@ -62,7 +62,7 @@ set dotenv-load := true
 
 # run tests
 @test *ARGS:
-    just run pytest {{ ARGS }} --ds=config.settings.test
+    docker compose run --rm test pytest {{ ARGS }} --ds=config.settings.test
 
 # run tests with coverage
 @test-cov *ARGS:
