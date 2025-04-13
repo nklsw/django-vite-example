@@ -45,7 +45,7 @@ jobs:
         run: docker compose up -d
       
       - name: Run tests
-        run: docker compose exec app pytest --ds=config.settings.test
+        run: docker compose exec test pytest --ds=config.settings.test
 
       - name: Show Docker logs on failure
         if: failure()
