@@ -18,8 +18,12 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["django-debug-toolbar>=4.4.6", "granian[reload]>=1.7.4", "ruff>=0.9.1"]
-test = ["pytest-django>=4.9.0"]
+dev = [
+    "django-debug-toolbar>=4.4.6",
+    "granian[reload]>=1.7.4",
+    "ruff>=0.9.1",
+]
+test = ["pytest-django>=4.9.0", "coverage>=7.8.0",]
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"

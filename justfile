@@ -63,10 +63,12 @@ set dotenv-load := true
 # run tests
 @test *ARGS:
     docker compose run --rm test pytest {{ ARGS }} --ds=config.settings.test
+    just stop
 
 # run tests with coverage
 @test-cov *ARGS:
-    just run coverage run -m pytest --ds=config.settings.test && coverage report -m {{ ARGS }}
+    docker compose run --rm test coverage run -m pytest --ds=config.settings.test && docker compose run --rm test coverage report -m {{ ARGS }}
+    just stop
 
 # clean up cache files etc.
 @clean *ARGS:
