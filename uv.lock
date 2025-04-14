@@ -157,7 +157,7 @@ wheels = [
 
 [[package]]
 name = "django-structlog"
-version = "9.0.0"
+version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
@@ -165,9 +165,9 @@ dependencies = [
     { name = "django-ipware" },
     { name = "structlog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/28/43/3d849f0e4bed479f283923ff07cb64dc1e0c0af7a3ed0ba3052725a4d48b/django_structlog-9.0.0.tar.gz", hash = "sha256:0ada1ac0fa4e90a499fc9ce22fc164830304e7219cab12d3b5ef9c2f2967ff5b", size = 22349 }
+sdist = { url = "https://files.pythonhosted.org/packages/6b/8c/cc2711def7a365ce5ff4cee73a57f7ca329369a02715adf7090b208f71fe/django_structlog-9.1.1.tar.gz", hash = "sha256:14342c6c824581f1e063c88a8bc52314cd67995a3bd4a4fc8c27ea37ccd78947", size = 22948 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/47/6c/991eedcab585203a008eafdbb0c63510595a4fb5ba8bb91098fa1b7184e5/django_structlog-9.0.0-py3-none-any.whl", hash = "sha256:8c32097b3f09b2727b746d6cdf4f50565c62fd040b3a0c98cb731de0b380b854", size = 17535 },
+    { url = "https://files.pythonhosted.org/packages/ec/c5/c43b4182464e0dada9674c3e9602222023808ad3be39663074b5f9080a8c/django_structlog-9.1.1-py3-none-any.whl", hash = "sha256:5b6ac3abdf6549e94ccb35160b1f10266f1627c3ac77844571235a08a1ddae66", size = 18087 },
 ]
 
 [[package]]
