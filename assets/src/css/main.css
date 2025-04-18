@@ -156,3 +156,39 @@ formset-text-input {
 .dj-richtext-wrapper a {
 	@apply text-blue-500 underline;
 }
+
+.btn-spinner {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  position: relative;
+  margin-top: -0.15em;
+}
+
+.btn-spinner:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid rgba(255, 255, 255, 1.0);
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:has(.btn-spinner) {
+  text-align: center;
+}

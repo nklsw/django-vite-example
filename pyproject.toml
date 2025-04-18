@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13, <4"
 dependencies = [
     "django>=5.1.4",
+    "django-allauth>=65.7.0",
     "django-cotton>=1.5.2",
     "django-environ>=0.11.2",
     "django-formset>=1.6.1",
@@ -35,7 +36,7 @@ extend-exclude = ["migrations", "static"]
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "D203", "D212", "COM812"]
+ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "D203", "D212", "COM812", "RUF012"]
 
 [tool.ruff.lint.per-file-ignores]
 "*/tests/**.py" = ["S101"]

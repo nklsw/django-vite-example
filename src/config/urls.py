@@ -19,7 +19,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from apps.demo.urls import urlpatterns as demo_urls
 from apps.demo.views import index as demo_index
@@ -27,6 +27,7 @@ from apps.demo.views import index as demo_index
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", demo_index, name="dashboard"),
+    path("accounts/", include("allauth.urls")),
     *demo_urls,
 ]
 

@@ -5,6 +5,8 @@ from .base import env
 
 DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost", "0.0.0.0"])  # noqa: S104
 
 INSTALLED_APPS += ["debug_toolbar", "django_structlog"]  # noqa: F405
