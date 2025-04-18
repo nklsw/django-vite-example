@@ -143,14 +143,14 @@ wheels = [
 
 [[package]]
 name = "django-formset"
-version = "1.6.1"
+version = "1.7.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/93/81/f028b4e4f65a163d28f18c692c27c06c81118d67b5d3a5d40ce18acd96e8/django_formset-1.6.1.tar.gz", hash = "sha256:0c8e3b6f7f1e33a44c4513b0c69533d479a146b12a045454bfc056c4ad84d159", size = 789457 }
+sdist = { url = "https://files.pythonhosted.org/packages/1e/4a/825b00c643d31f15d63191f5616bb1a35effb41948fcbc1a2895af533c05/django_formset-1.7.6.tar.gz", hash = "sha256:25116a1d4b79daa2fa2b58cd4e01c570180d8520bc820fa83d2a1fc4c14bb403", size = 795220 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/fd/ad/1dfb5b20a9a22e0275b31c6aabc43d35c3b9f5d6e2e1a69c8976423bc364/django_formset-1.6.1-py3-none-any.whl", hash = "sha256:25dd6541be457f91ebf3b8ad778dfb211a0d54865e489eba6f7f505ac802bdc0", size = 1098580 },
+    { url = "https://files.pythonhosted.org/packages/d3/db/005cee3ee79d9754bd32dc6facdce5be9cc9bba19b7051cfdd0bbb5f5c37/django_formset-1.7.6-py3-none-any.whl", hash = "sha256:443545065a07d5a367cd552a07c50587beb9c0ef8bbcb321759f8c3f78dc3408", size = 1107169 },
 ]
 
 [[package]]
