@@ -1,0 +1,21 @@
+<c-vars field />
+<div class="flex w-full flex-col gap-1 text-on-surface dark:text-on-surface-dark">
+    <label for="{{ field.id_for_label }}"
+           class="w-fit pl-0.5
+                  {% if field.errors %}text-danger{% endif %}">{{ field.label }}</label>
+    <input id="{{ field.id }}"
+           type="{{ field.field.widget.input_type }}"
+           name="{{ field.name }}"
+           value="{{ field.value|default_if_none:'' }}"
+           placeholder="{{ field.field.widget.attrs.placeholder }}"
+           autocomplete="{{ field.field.widget.attrs.autocomplete }}"
+           {% if field.field.required %}required{% endif %}
+           {% if field.field.disabled %}disabled{% endif %}
+           {{ attrs }}
+           class="w-full rounded-radius border border-outline bg-surface px-3 py-2 focus-visible:outline-2 focus-visible:outline-outline-strong disabled:cursor-not-allowed disabled:opacity-75 dark:bg-surface-dark-alt dark:focus-visible:outline-primary-dark/50 dark:border-outline-dark dark:placeholder-on-surface-dark/65 hover:border-outline-strong/50 dark:hover:border-outline-strong" />
+    {% if field.errors %}
+        <div class="space-y-1 mt-2">
+            {% for error in field.errors %}<small class="pl-0.5 text-danger">{{ error }}</small>{% endfor %}
+        </div>
+    {% endif %}
+</div>

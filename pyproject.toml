@@ -9,7 +9,6 @@ dependencies = [
     "django-allauth>=65.7.0",
     "django-cotton>=1.5.2",
     "django-environ>=0.11.2",
-    "django-formset>=1.6.1",
     "django-structlog>=9.0.0",
     "django-vite>=3.0.6",
     "granian>=1.7.4",
@@ -20,7 +19,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "cotton-iconify>=0.1.0",
     "django-debug-toolbar>=4.4.6",
+    "djlint>=1.36.4",
     "granian[reload]>=1.7.4",
     "ruff>=0.9.1",
 ]
@@ -40,3 +41,6 @@ ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "D203"
 
 [tool.ruff.lint.per-file-ignores]
 "*/tests/**.py" = ["S101"]
+
+[tool.djlint]
+format_attribute_template_tags=true

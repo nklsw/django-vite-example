@@ -1,0 +1,28 @@
+{% load django_vite %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"
+      class="text-zinc-950 antialiased bg-zinc-100 scheme-light dark:scheme-dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% vite_hmr_client %}
+        {% vite_asset 'js/main.js' %}
+        {{ scripts }}
+    </head>
+    <body x-data="{ darkMode: document.documentElement.classList.contains('dark'), dropdownOpen: false, toggleDarkMode() { this.darkMode = !this.darkMode; localStorage.theme = this.darkMode ? 'dark' : 'light'; document.documentElement.classList.toggle('dark', this.darkMode); } }"
+          x-init="if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); darkMode = true; } else { document.documentElement.classList.remove('dark'); darkMode = false; }">
+        <!-- Main Layout Container -->
+        <div class="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col lg:bg-zinc-100 dark:bg-zinc-900 dark:lg:bg-zinc-950">
+            <!-- Fixed Sidebar -->
+            <!-- Main Content Area -->
+            <div class="flex flex-1 flex-col lg:pb-2 lg:min-w-0 lg:px-2 lg:pt-2">
+                <div class="grow p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-sm lg:ring-1 lg:ring-zinc-950/5 dark:lg:bg-zinc-900 dark:lg:ring-white/10">
+                    <main class="up-main mx-auto max-w-6xl focus:outline-none flex flex-col items-center justify-center h-full">
+                        {{ slot }}
+                    </main>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

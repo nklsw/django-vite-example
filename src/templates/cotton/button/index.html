@@ -1,0 +1,90 @@
+{% comment "How to use the button component" %}
+<c-button>Text</c-button>
+<c-button variant="outline" color="danger" icon="icon.plus" icon_position="left">Text</c-button>
+{% endcomment %}
+<c-vars type="button" color="primary" variant="filled" icon icon_position as />
+{% if as == "a" %}
+    <a {% else %}
+       button
+       type="{{ type }}"
+       {% endif %}
+       {% with base_classes="inline-flex justify-center items-center gap-2 whitespace-nowrap rounded-radius border px-4 py-2 text-sm font-medium tracking-wide transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed" %}
+       {% if color == "secondary" %}
+           class="{{ base_classes }}
+           {% if variant == 'outline' %}
+               bg-transparent text-secondary hover:bg-secondary/10
+           {% else %}
+               bg-secondary text-on-secondary
+           {% endif %}
+       border-secondary
+       focus-visible:outline-secondary
+       dark:bg-secondary-dark
+       dark:border-secondary-dark
+       dark:text-on-secondary-dark
+       dark:focus-visible:outline-secondary-dark
+       "
+       {% elif color == "alternate" %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent text-outline hover:bg-surface-alt/10
+              {% else %}
+                  bg-surface-alt text-on-surface-strong
+              {% endif %}
+              border-surface-alt focus-visible:outline-surface-alt dark:bg-surface-dark-alt dark:border-surface-dark-alt dark:text-on-surface-dark-strong dark:focus-visible:outline-surface-dark-alt"
+       {% elif color == "info" %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent text-info hover:bg-info/10
+              {% else %}
+                  bg-info text-on-info
+              {% endif %}
+              border-info focus-visible:outline-info dark:bg-info-dark dark:border-info-dark dark:text-on-info-dark dark:focus-visible:outline-info-dark"
+       {% elif color == "danger" %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent text-danger hover:bg-danger/10
+              {% else %}
+                  bg-danger text-on-danger
+              {% endif %}
+              border-danger focus-visible:outline-danger dark:bg-danger-dark dark:border-danger-dark dark:text-on-danger-dark dark:focus-visible:outline-danger-dark"
+       {% elif color == "warning" %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent text-warning hover:bg-warning/10
+              {% else %}
+                  bg-warning text-on-warning
+              {% endif %}
+              border-warning focus-visible:outline-warning dark:bg-warning-dark dark:border-warning-dark dark:text-on-warning-dark dark:focus-visible:outline-warning-dark"
+       {% elif color == "success" %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent text-success hover:bg-success/10
+              {% else %}
+                  bg-success text-on-success
+              {% endif %}
+              border-success focus-visible:outline-success dark:bg-success-dark dark:border-success-dark dark:text-on-success-dark dark:focus-visible:outline-success-dark"
+       {% else %}
+       class="{{ base_classes }}
+              {% if variant == 'outline' %}
+                  bg-transparent hover:bg-surface-alt text-primary dark:hover:bg-surface-dark-alt dark:text-primary-dark
+              {% else %}
+                  bg-primary text-on-primary dark:bg-primary-dark dark:text-on-primary-dark
+              {% endif %}
+              border-primary focus-visible:outline-primary dark:border-primary-dark dark:focus-visible:outline-primary-dark"
+       {% endif %}
+       {% endwith %}
+       {{ attrs }}>
+        {% if icon and icon_position == 'right' %}
+            {{ slot }}
+            <c-component is="{{ icon }}" class="size-4 fill-on-primary dark:fill-on-primary-dark" />
+        {% elif icon %}
+            <c-component is="{{ icon }}" class="size-4 fill-on-primary dark:fill-on-primary-dark" />
+            {{ slot }}
+        {% else %}
+            {{ slot }}
+        {% endif %}
+        {% if as == "a" %}
+        </a>
+    {% else %}
+    </button>
+{% endif %}

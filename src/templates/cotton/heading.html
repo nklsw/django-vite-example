@@ -1,13 +1,10 @@
-<c-vars classes='text-2xl/7 leading-8 font-semibold text-on-surface dark:text-on-surface-dark'
-        level=1
-/>
-
+<c-vars class='text-2xl/7 leading-8 font-semibold' level=1 />
 {% if level == 1 %}
-<h1 class="{{ classes }}">{{ slot }}</h1>
+    <h1 class="{{ class }}">{{ slot }}</h1>
 {% elif level == 2 %}
-<h2 class="{{ classes }}">{{ slot }}</h2>
+    <h2 class="{{ class }}">{{ slot }}</h2>
 {% elif level == 3 %}
-<h3 class="{{ classes }}">{{ slot }}</h3>
+    <h3 class="{{ class }}">{{ slot }}</h3>
 {% elif level == 4 %}
-<h4 class="{{ classes }}">{{ slot }}</h4>
+    <h4 class="{{ class }}">{{ slot }}</h4>
 {% endif %}

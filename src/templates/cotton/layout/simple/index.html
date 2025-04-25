@@ -1,0 +1,71 @@
+<c-layout.base>
+<div x-data="{ showSidebar: false }"
+     class="relative flex w-full flex-col md:flex-row">
+    <!-- This allows screen readers to skip the sidebar and go directly to the main content. -->
+    <a class="sr-only" href="#main-content">skip to the main content</a>
+    <!-- dark overlay for when the sidebar is open on smaller screens  -->
+    <div x-cloak
+         x-show="showSidebar"
+         class="fixed inset-0 z-10 bg-surface-dark/50 backdrop-blur-xs md:hidden"
+         aria-hidden="true"
+         x-on:click="showSidebar = false"
+         x-transition.opacity></div>
+    <!-- navbar -->
+    <nav x-cloak
+         class="fixed left-0 z-20 flex h-svh w-64 shrink-0 flex-col bg-surface-alt p-4 transition-transform duration-300 md:translate-x-0 md:relative dark:bg-surface-dark-alt"
+         x-bind:class="showSidebar ? 'translate-x-0' : '-translate-x-64'"
+         aria-label="sidebar navigation">
+        <!-- logo  -->
+        <a href="#"
+           class="px-2 w-fit text-3xl py-2 font-bold text-on-surface-strong dark:text-on-surface-dark-strong">
+            <span class="sr-only">homepage</span>
+            <span>Logo</span>
+        </a>
+        <!-- primary nav links -->
+        <div class="flex flex-col gap-2 overflow-y-auto pt-8 pb-6">
+            <c-layout.simple.nav_item icon="icon.home" href="#">Dashboard</c-layout.simple.nav_item>
+            <c-layout.simple.nav_item icon="icon.user-20-solid" href="#">Profile</c-layout.simple.nav_item>
+            <c-layout.simple.nav_item icon="icon.credit-card-solid" href="#">Payments</c-layout.simple.nav_item>
+            <c-layout.simple.nav_item icon="icon.user-group-solid" href="#">Team</c-layout.simple.nav_item>
+            <c-layout.simple.nav_item icon="icon.cog-6-tooth-16-solid" href="#">Settings</c-layout.simple.nav_item>
+        </div>
+        <!-- bottom nav area -->
+        <div class="mt-auto">
+            <!-- bottom nav links -->
+            <div class="flex flex-col gap-2 overflow-y-auto pb-6">
+                <c-layout.simple.nav-item href="#" icon="icon.question-mark-circle-16-solid">Get Help</c-layout.simple.nav-item>
+            </div>
+            <!-- profile menu dropdown  -->
+            <c-layout.simple.dropdown-menu/>
+
+        </div>
+    </nav>
+    <!-- top bar on mobile -->
+    <div class="sticky z-10 top-0 flex items-center gap-x-6 bg-surface px-4 py-4 sm:px-6 md:hidden">
+        <button x-on:click="showSidebar = ! showSidebar"
+                type="button"
+                class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="size-6"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 aria-hidden="true"
+                 data-slot="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+        <div class="flex-1 text-sm/6 font-semibold text-gray-900">Dashboard</div>
+        <a href="#">
+            <span class="sr-only">Your profile</span>
+            <img class="size-8 rounded-full bg-gray-50"
+                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                 alt="">
+        </a>
+    </div>
+    <!-- main content  -->
+    <div id="main-content"
+         class="h-svh w-full overflow-y-auto p-4 bg-surface dark:bg-surface-dark">{{ slot }}</div>
+</div>
+</c-layout.base>

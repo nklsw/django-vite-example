@@ -1,0 +1,52 @@
+<div x-data="{ isOpen: false, openedWithKeyboard: false, dropdownStyles: {} }" class="relative w-full" x-on:keydown.esc.window="isOpen = false, openedWithKeyboard = false">
+    <!-- Toggle Button -->
+    <button type="button" 
+            x-on:click="
+                isOpen = !isOpen; 
+                if (isOpen) {
+                    $nextTick(() => {
+                        const buttonHeight = $el.offsetHeight;
+                        dropdownStyles = {
+                            top: `auto`,
+                            bottom: `calc(${buttonHeight}px + 8px)`
+                        };
+                    });
+                }
+            " 
+            class="inline-flex w-full items-center justify-between whitespace-nowrap rounded-radius px-2 py-2 text-sm font-semibold tracking-wide  transition hover:text-on-surface-strong hover:bg-primary/5 dark:hover:bg-primary-dark/5 dark:hover:text-on-surface-dark-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-outline-strong dark:focus-visible:outline-outline-dark-strong" aria-haspopup="true" x-on:keydown.space.prevent="openedWithKeyboard = true" x-on:keydown.enter.prevent="openedWithKeyboard = true" x-on:keydown.down.prevent="openedWithKeyboard = true" x-bind:class="isOpen || openedWithKeyboard ? 'text-on-surface-strong dark:text-on-surface-dark-strong' : 'text-on-surface dark:text-on-surface-dark'" x-bind:aria-expanded="isOpen || openedWithKeyboard">
+        <div class="inline-flex items-center gap-2">
+            <img src="https://penguinui.s3.amazonaws.com/component-assets/avatar-7.webp"
+                 class="size-8 object-cover rounded-radius"
+                 alt="avatar"
+                 aria-hidden="true" />
+            <span>Profile Menu</span>    
+        </div>
+        
+        <c-icon.chevron-down class="size-3 rotate-180"/>
+    </button>
+    <!-- Dropdown Menu -->
+    <div x-cloak 
+         x-show="isOpen || openedWithKeyboard" 
+         x-transition 
+         x-trap="openedWithKeyboard" 
+         x-on:click.outside="isOpen = false, openedWithKeyboard = false" 
+         x-on:keydown.down.prevent="$focus.wrap().next()" 
+         x-on:keydown.up.prevent="$focus.wrap().previous()" 
+         x-bind:style="dropdownStyles"
+         class="absolute border border-outline dark:border-outline-dark shadow-sm flex w-full flex-col overflow-hidden rounded-radius bg-surface dark:bg-surface-dark divide-y divide-outline dark:divide-outline-dark" 
+         role="menu">
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.user-20-solid">Profile</c-layout.simple.dropdown-menu-item>
+        </div>
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.cog-6-tooth-16-solid">Settings</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.credit-card-solid">Payments</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item x-show="darkMode" @click="toggleDarkMode()" icon="icon.sun-solid">Light Mode</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item x-show="!darkMode" @click="toggleDarkMode()" icon="icon.moon-solid">Dark Mode</c-layout.simple.dropdown-menu-item>
+            
+        </div>
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.arrow-right-start-on-rectangle-20-solid">Logout</c-layout.simple.dropdown-menu-item>
+        </div>   
+    </div>
+</div>

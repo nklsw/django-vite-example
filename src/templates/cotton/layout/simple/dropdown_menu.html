@@ -1,0 +1,52 @@
+<div x-data="{ menuIsOpen: false }"
+     class="mt-auto"
+     x-on:keydown.esc.window="menuIsOpen = false">
+    <button type="button"
+            class="flex w-full items-center rounded-radius gap-2 p-2 text-left text-on-surface hover:bg-primary/5 hover:text-on-surface-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary dark:text-on-surface-dark dark:hover:bg-primary-dark/5 dark:hover:text-on-surface-dark-strong dark:focus-visible:outline-primary-dark"
+            x-bind:class="menuIsOpen ? 'bg-primary/10 dark:bg-primary-dark/10' : ''"
+            aria-haspopup="true"
+            x-on:click="menuIsOpen = ! menuIsOpen"
+            x-bind:aria-expanded="menuIsOpen">
+        <img src="https://penguinui.s3.amazonaws.com/component-assets/avatar-7.webp"
+             class="size-8 object-cover rounded-radius"
+             alt="avatar"
+             aria-hidden="true" />
+        <div class="flex flex-col">
+            <span class="text-sm font-bold text-on-surface dark:text-on-surface-dark">Profile Menu</span>
+            <span class="sr-only">profile settings</span>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24"
+             stroke="currentColor"
+             fill="none"
+             stroke-width="2"
+             class="ml-auto size-4 shrink-0 -rotate-90 md:rotate-0"
+             aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+    <!-- menu with group dividers -->
+    <div x-cloak
+         x-show="menuIsOpen"
+         class="absolute bottom-20 right-6 z-20 -mr-1 w-48 divide-y divide-outline bg-surface border border-outline dark:border-outline-dark dark:divide-outline-dark dark:bg-surface-dark rounded-radius md:-right-44 md:bottom-4"
+         role="menu"
+         x-on:click.outside="menuIsOpen = false"
+         x-on:keydown.down.prevent="$focus.wrap().next()"
+         x-on:keydown.up.prevent="$focus.wrap().previous()"
+         x-transition=""
+         x-trap="menuIsOpen">
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.user-20-solid">Profile</c-layout.simple.dropdown-menu-item>
+        </div>
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.cog-6-tooth-16-solid">Settings</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.credit-card-solid">Payments</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item x-show="darkMode" @click="toggleDarkMode()" icon="icon.sun-solid">Light Mode</c-layout.simple.dropdown-menu-item>
+            <c-layout.simple.dropdown-menu-item x-show="!darkMode" @click="toggleDarkMode()" icon="icon.moon-solid">Dark Mode</c-layout.simple.dropdown-menu-item>
+            
+        </div>
+        <div class="flex flex-col py-1.5">
+            <c-layout.simple.dropdown-menu-item href="#" icon="icon.arrow-right-start-on-rectangle-20-solid">Logout</c-layout.simple.dropdown-menu-item>
+        </div>
+    </div>
+</div>

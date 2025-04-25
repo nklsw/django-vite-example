@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    username = None  # Remove username field
+    USERNAME_FIELD = "email"
     email = models.EmailField("email address", unique=True)
 
     REQUIRED_FIELDS: ClassVar[list[str]] = []

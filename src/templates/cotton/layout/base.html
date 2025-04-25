@@ -1,0 +1,17 @@
+{% load django_vite %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="antialiased bg-surface-alt dark:bg-surface-dark-alt text-on-surface dark:text-on-surface-dark">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% vite_hmr_client %}
+        {% vite_asset 'js/main.js' %}
+        {{ scripts }}
+    </head>
+    <body x-data="{ darkMode: document.documentElement.classList.contains('dark'), dropdownOpen: false, toggleDarkMode() { this.darkMode = !this.darkMode; localStorage.theme = this.darkMode ? 'dark' : 'light'; document.documentElement.classList.toggle('dark', this.darkMode); } }"
+          x-init="if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); darkMode = true; } else { document.documentElement.classList.remove('dark'); darkMode = false; }">
+        <!-- Layout Container -->
+        {{ slot }}
+    </body>
+</html>
