@@ -1,4 +1,4 @@
-FROM node:23.11-bookworm-slim AS assets
+FROM node:24.0-bookworm-slim AS assets
 
 WORKDIR /app/assets
 
