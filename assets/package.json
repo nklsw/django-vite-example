@@ -14,6 +14,6 @@
   },
   "dependencies": {
     "alpinejs": "^3.14.9",
-    "unpoly": "^3.10.2"
+    "unpoly": "^3.11.0"
   }
 }
