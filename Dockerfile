@@ -66,7 +66,7 @@ COPY ./src /app/src
 
 ###############################################################################
 
-FROM python:3.13-slim-bookworm AS app_dev
+FROM python:3.14-slim-bookworm AS app_dev
 
 # Copy the application from the builder
 COPY --from=app_builder --chown=app:app /app /app
@@ -85,7 +85,7 @@ CMD ["granian", "--interface", "asgi", "config.asgi:application", "--host", "0.0
 
 ###############################################################################
 
-FROM python:3.13-slim-bookworm AS app_prod
+FROM python:3.14-slim-bookworm AS app_prod
 
 # Copy the application from the builder
 COPY --from=app_builder --chown=app:app /app /app
